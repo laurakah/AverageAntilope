@@ -5,6 +5,8 @@ import random
 import time
 import copy
 
+DATA_SET_COUNT = 10000
+
 LONGITUDE_CONST = 520000.0
 LONGITUDE_MIN = 2240
 LONGITUDE_MAX = 3811
@@ -83,7 +85,7 @@ def main():
     dataList = []
     jsonBuffer = {}
     jsonData = {}
-    for i in range(1, 1000):
+    for i in range(DATA_SET_COUNT):
         buff = generateDataSet(sensorData, locationData, jsonData, jsonBuffer)
         dataList.append(copy.deepcopy(buff))
     writeData(dataList, dataFile)
