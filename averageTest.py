@@ -51,7 +51,7 @@ class AverageDataTestCase(unittest.TestCase):
         expectedData.append(copy.deepcopy(self.dataSet))
         k = expectedData[0]["deviceData"].keys()
         for i in range(len(k)):
-            if k[i] in ["time"]:
+            if k[i] in ["time"] or k[i] in ["deviceId"]:
                 continue
             expectedData[0]["deviceData"][k[i]] *= 2
         expectedData[0].update({"count": 2})
