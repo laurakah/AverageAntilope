@@ -4,7 +4,7 @@ import time
 
 class AverageData():
 
-    OUTPUT_FILE = "averageData.txt"
+    OUTPUT_FILE = "averageData.json"
     INPUT_FILE = "testData.json"
 
     def __init__(self):
@@ -77,6 +77,7 @@ class AverageData():
 
 def main():
     # 22.5 s run time / 100.000 data sets
+    # 0.5 s run time / 10.000 data sets
     print time.time()
     a = AverageData()
     a.run()
