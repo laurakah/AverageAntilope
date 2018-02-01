@@ -47,7 +47,7 @@ class AverageData():
                 self.locationData[i]["count"] += 1
                 k = dataSet["deviceData"].keys()
                 for key in k:
-                    if key in ["time"] or key in ["deviceId"]:
+                    if key in ["time"]:
                         continue
                     self.locationData[i]["deviceData"][key] += dataSet["deviceData"][key]
 
@@ -58,7 +58,7 @@ class AverageData():
         k = data[0]["deviceData"].keys()
         for i in range(len(data)):
             for key in k:
-                if key in ["time"] or key in ["deviceId"]:
+                if key in ["time"]:
                     continue
                 data[i]["deviceData"][key] /= data[i]["count"]
         return data
@@ -68,10 +68,17 @@ class AverageData():
         f.write(json.dumps(data))
         f.close()
 
+    def _removeDeviceIdAndTime(self, data):
+        for dataSet in data:
+            del dataSet["deviceData"]["time"]
+            del dataSet["deviceId"]
+        return data
+
     def run(self):
         self.rawDataJson = json.load(open(self.INPUT_FILE))
         self._countDoubleLocations(self.rawDataJson, self.shortenedLocations)
         data = self._calculateAverageData(self.locationData)
+        data = self._removeDeviceIdAndTime(data)
         self._writeDataToFile(data, self.OUTPUT_FILE)
         return data
 
