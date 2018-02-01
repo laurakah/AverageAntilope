@@ -8,7 +8,7 @@ import averageData
 class AverageDataTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.jsonDataSet = '{"deviceData": {"acceleration": 133, "noise": 46, "temperature": 11, "light": 457, "uv": 287, "humidity": 34, "time": "11:27:23", "pollution": 3321}, "deviceId": 5613, "location": {"type": "Point", "coordinates": [52.2944, 13.4053]}}'
+        self.jsonDataSet = '{"deviceData": {"acceleration": 133, "noise": 46, "temperature": 11, "light": 457, "uv": 287, "humidity": 34, "dateTime": "11:27:23", "pollution": 3321}, "deviceId": 5613, "location": {"type": "Point", "coordinates": [52.2944, 13.4053]}}'
         self.dataSet = json.loads(self.jsonDataSet)
         self.dataList = [self.dataSet]
         self.shortLoc = ['52.29', '13.40']
@@ -51,7 +51,7 @@ class AverageDataTestCase(unittest.TestCase):
         expectedData.append(copy.deepcopy(self.dataSet))
         k = expectedData[0]["deviceData"].keys()
         for i in range(len(k)):
-            if k[i] in ["time"]:
+            if k[i] in ["dateTime"]:
                 continue
             expectedData[0]["deviceData"][k[i]] *= 2
         expectedData[0].update({"count": 2})

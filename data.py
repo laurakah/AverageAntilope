@@ -5,7 +5,7 @@ import random
 import time
 import copy
 
-DATA_SET_COUNT = 10000
+DATA_SET_COUNT = 1000
 
 LONGITUDE_CONST = 520000.0
 LONGITUDE_MIN = 2240
@@ -38,8 +38,8 @@ def generateLocation(min, max, const):
     return dataValue
 
 def generateTime(dic):
-    dataValue = time.strftime("%H:%M:%S")
-    dataKey = "time"
+    dataValue = time.strftime("%Y-%m-%dT%H:%M:%S")
+    dataKey = "dateTime"
     dic[dataKey] = dataValue
 
 def generateId(buff):
