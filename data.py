@@ -46,9 +46,18 @@ def generateId(buff):
     dataValue = random.randint(0, 10000)
     dataKey = "deviceId"
     buff[dataKey] = dataValue
+    return dataValue
+
+def generateTourId(buff, deviceId):
+    deviceId = str(deviceId)
+    dateTime = str(time.strftime("%Y-%m-%dT%H:%M:%S"))
+    dataValue = deviceId + "-" + dateTime
+    dataKey = "tourId"
+    buff[dataKey] = dataValue
 
 def wrapData(buff, dic):
-    generateId(buff)
+    deviceId = generateId(buff)
+    generateTourId(buff, deviceId)
     dataValue = dic
     dataKey = "deviceData"
     buff[dataKey] = dataValue
