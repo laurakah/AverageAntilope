@@ -43,7 +43,7 @@ def generateTime(dic):
     dic[dataKey] = dataValue
 
 def generateId(buff):
-    dataValue = random.randint(0, 10000)
+    dataValue = str(random.randint(100000000000000, 999999999999999))
     dataKey = "deviceId"
     buff[dataKey] = dataValue
     return dataValue
