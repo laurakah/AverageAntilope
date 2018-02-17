@@ -27,9 +27,17 @@ TEMPERATURE_MIN = -20
 TEMPERATURE_MAX = 55
 HUMIDITY_MIN = 0
 HUMIDITY_MAX = 100
+PRESSURE_MIN = 1
+PRESSURE_MAX = 10
 
 def generateData(key, min, max, dic):
     dataValue = random.randint(min, max)
+    dataKey = key
+    dic[dataKey] = dataValue
+
+def generatePressureValue(key, min, max, dic):
+    dataValue = random.randint(min, max)
+    dataValue = float(dataValue) / 100.0
     dataKey = key
     dic[dataKey] = dataValue
 
@@ -63,7 +71,7 @@ def wrapData(buff, dic):
     buff[dataKey] = dataValue
 
 def wrapLocation(buff):
-    geoJsonWrapper = {"type": "Point"}
+    geoJsonWrapper = {"type": "Point", "altitude": "211.9"}
     coordinates = []
     coordinateKey = "coordinates"
     coordinates.append(generateLocation(LONGITUDE_MIN, LONGITUDE_MAX, LONGITUDE_CONST))
@@ -77,6 +85,7 @@ def writeData(data, fileName):
 
 def generateJson(dataSource, locationSource, dic):
     generateTime(dic)
+    generatePressureValue("pressure", PRESSURE_MIN, PRESSURE_MAX, dic)
     for keyName in dataSource.keys():
         generateData(keyName, dataSource[keyName][0], dataSource[keyName][1], dic)
 
